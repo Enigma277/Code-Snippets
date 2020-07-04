@@ -9,7 +9,6 @@ struct  SCC{
 
     void init(int vertex){
         n = vertex;
-        indegree.assign(vertex+1, false);
         visited.assign(vertex+1, false);
         comp_id.assign(vertex+1, -1);
         for(int i=1;i<=n;i++){
