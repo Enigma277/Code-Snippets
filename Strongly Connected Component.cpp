@@ -9,10 +9,13 @@ struct  SCC{
 
     void init(int vertex){
         n = vertex;
+        comp = 0;
         visited.assign(vertex+1, false);
         comp_id.assign(vertex+1, -1);
         for(int i=1;i<=n;i++){
             graph[i].clear();
+            reverse_graph[i].clear();
+            compressed_DAG[i].clear();
         }
     }
     
