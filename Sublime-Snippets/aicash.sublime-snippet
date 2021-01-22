@@ -1,0 +1,25 @@
+<snippet>
+	<content><![CDATA[
+const int N=100005;
+int n,t[2*N];
+void build(){
+
+    for(int i=n-1;i>0;--i) t[i]=t[i<<1]+t[i<<1|1];
+}
+void modify(int p,int val){
+    for(t[p+=n]=val;p>1;p>>=1) t[p>>1]=t[p]+t[p^1];
+}
+int query(int l,int r){
+    int res=0;
+    for(l+=n,r+=n+1;l<r;l>>=1,r>>=1){
+        if(l&1) res+=t[l++];
+        if(r&1) res+=t[--r];
+    }
+    return res;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>aicash</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

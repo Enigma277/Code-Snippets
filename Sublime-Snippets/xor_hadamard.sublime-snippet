@@ -1,0 +1,33 @@
+<snippet>
+	<content><![CDATA[
+int mod=hell,lim=(1<<17),inv=expo(lim,mod-2,mod);
+void xorFWHT(int *data,int dim,bool inverse){
+	int len,i,j,u,v;
+	for(len=1;2*len<=dim;len<<=1){
+		for(i=0;i<dim;i+=2*len){
+			for(j=0;j<len;j++){
+				u=data[i+j];
+				v=data[i+len+j];
+				if(!inverse){
+					data[i+j]=(u+v)%mod;
+					data[i+len+j]=(u-v+mod)%mod;
+				} 
+				else{
+					data[i+j]=(u+v)%mod;
+					data[i+len+j]=(u-v+mod)%mod;
+				}
+			}
+		}
+	}
+	if(inverse){
+		rep(_,0,lim){
+			data[_]=(data[_]*inv)%mod;
+		}
+	}
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>xorFWHT</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

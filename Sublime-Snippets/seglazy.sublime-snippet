@@ -1,0 +1,59 @@
+<snippet>
+	<content><![CDATA[
+const int N=100005;
+int a[N],seg[4*N],lazy[4*N];
+void build(int node,int start,int end){
+    if(start==end){
+        seg[node]=a[start];
+        return;
+    }
+    int mid=(start+end)>>1;
+    build(node<<1,start,mid);
+    build(node<<1|1,mid+1,end);
+    seg[node]=seg[node<<1]+seg[node<<1|1];
+}
+void update(int node,int start,int end,int l,int r,int val){
+    if(lazy[node]!=0){
+        seg[node]+=(end-start+1)*lazy[node];
+        if(start!=end){
+            lazy[node<<1]+=lazy[node];
+            lazy[node<<1|1]+=lazy[node];
+        }
+        lazy[node]=0;
+    }
+    if(start>end || start>r || end<l) return;
+    if(l<=start && end<=r){
+        seg[node]+=(end-start+1)*val;
+        if(start!=end){
+            lazy[node<<1]+=val;
+            lazy[node<<1|1]+=val;
+        }
+        return;
+    }
+    int mid=(start+end)>>1;
+    update(node<<1,start,mid,l,r,val);
+    update(node<<1|1,mid+1,end,l,r,val);
+    seg[node]=seg[node<<1]+seg[node<<1|1];
+}
+int query(int node,int start,int end,int l,int r){
+    if(start>end || start>r || end<l) return 0;
+    if(lazy[node]!=0){
+        seg[node]+=(end-start+1)*lazy[node];
+        if(start!=end){
+            lazy[node<<1]+=lazy[node];
+            lazy[node<<1|1]+=lazy[node];
+        }
+        lazy[node]=0;
+    }
+    if(start>=l && end<=r) return seg[node];
+    int mid=(start+end)>>1;
+    int q1=query(node<<1,start,mid,l,r);
+    int q2=query(node<<1|1,mid+1,end,l,r);
+    return q1+q2;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>seglazy</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

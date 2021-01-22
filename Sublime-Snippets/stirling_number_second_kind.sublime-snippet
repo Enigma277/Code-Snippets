@@ -1,0 +1,20 @@
+<snippet>
+	<content><![CDATA[
+int S(int n,int k){
+    int ans=0;
+    rep(i,0,k+1){
+        if(i%2){
+            ans=(ans+hell-1LL*C(k,i)*expo(k-i,n,hell)%hell)%hell;
+        }
+        else{
+            ans=(ans+1LL*C(k,i)*expo(k-i,n,hell))%hell;
+        }
+    }
+    return (1LL*ans*inv[k])%hell;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>second_stirling</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

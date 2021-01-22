@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template<typename T>
+using ordered_set = tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>; 
+//change null_type to get ordered_map
+int main() {
+    ordered_set<int> s;
+    s.insert(1);
+    s.insert(3);
+    // count of elements in s strictly less than 2
+    cout<<s.order_of_key(2)<<endl;    
+    // print the 0-th smallest number in s (0-indexing)
+    cout<<*s.find_by_order(0)<<endl;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ordered_set</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

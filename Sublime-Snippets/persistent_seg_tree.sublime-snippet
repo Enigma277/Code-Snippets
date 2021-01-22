@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[
+struct node{
+    int max_count;
+    node *left,*right;
+    node(int _max_count,node *_left,node *_right):
+    max_count(_max_count),left(_left),right(_right){}
+    node* insert(int l,int r,int w,int val);
+};
+node *null=new node(0,NULL,NULL);
+node *node::insert(int l,int r,int w,int val){
+    if(l<=w && w<=r){
+        if(l==r) return new node(max(this->max_count,val),null,null);
+        int m=(l+r)>>1;
+        return new node(max(this->max_count,val),this->left->insert(l,m,w,val),this->right->insert(m+1,r,w,val));
+    }
+    return this;
+}
+int query(node *A, int l, int r,int x,int y){
+    if(A==NULL || r<x || l>y) return 0;
+    if(x<=l && r<=y) return A->max_count;
+    int m=(l+r)>>1;
+    return max(query(A->left,l,m,x,y),query(A->right,m+1,r,x,y));
+}
+node *root[100001];
+// root[i]=(i?root[i-1]:null)->insert();
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>persist</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

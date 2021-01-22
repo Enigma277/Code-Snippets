@@ -1,0 +1,11 @@
+<snippet>
+	<content><![CDATA[
+double lineDist(const P& a, const P& b, const P& p){
+    return (double)(b-a).cross(p-a)/(b-a).dist();
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>line_dist</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

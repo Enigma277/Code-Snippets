@@ -1,0 +1,39 @@
+<snippet>
+	<content><![CDATA[
+const int N=100005;
+int a[N],seg[N<<2];
+void build(int node,int start,int end){
+    if(start==end){
+        seg[node]=a[start];
+        return;
+    }
+    int mid=(start+end)>>1;
+    build(node<<1,start,mid);
+    build(node<<1|1,mid+1,end);
+    seg[node]=seg[node<<1]+seg[node<<1|1];
+}
+int query(int node,int start,int end,int l,int r){
+    if(l<=start && r>=end) return seg[node];
+    if(r<start || l>end) return 0;
+    int mid=(start+end)>>1;
+    int ans1=query(node<<1,start,mid,l,r);
+    int ans2=query(node<<1|1,mid+1,end,l,r);
+    return (ans1+ans2);
+}
+void update(int node,int start,int end,int x,int val){
+    if(start==end){
+        a[x]+=val;
+        seg[node]+=val;
+        return;
+    }
+    int mid=(start+end)>>1;
+    if(start<=x && x<=mid) update(node<<1,start,mid,x,val);
+    else update(node<<1|1,mid+1,end,x,val);
+    seg[node]=seg[node<<1]+seg[node<<1|1];
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>segtree</tabTrigger> 
+	<!-- Optional: Set a scope to limit where the snippet wiint trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

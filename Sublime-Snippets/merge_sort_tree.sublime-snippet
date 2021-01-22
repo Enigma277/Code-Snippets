@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+int tree[20][200005],A[200005];
+void build(int h,int l,int r){
+    if(l==r) tree[h][l]=A[l];
+    else{
+        int m=(l+r)>>1;
+        build(h+1,l,m);
+        build(h+1,m+1,r);
+        merge(tree[h+1]+l,tree[h+1]+m+1,tree[h+1]+m+1,tree[h+1]+r+1,tree[h]+l);
+    }
+}
+int query(int h,int l,int r,int a,int b,int val){
+    if(r<a || l>b || b<a) return 0;
+    if(a<=l && r<=b) return lower_bound(tree[h]+l,tree[h]+r+1,val)-tree[h]-l;
+    int m=(l+r)>>1;
+    return query(h+1,l,m,a,b,val)+query(h+1,m+1,r,a,b,val);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>merge_sort_tree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

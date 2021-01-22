@@ -1,0 +1,27 @@
+<snippet>
+	<content><![CDATA[
+template <class T> T& get(T &n){
+    int p;
+    bool f;
+    f=false;
+    n = 0;
+    do{
+        p=getchar();
+    }while( !isdigit(p) && p!='-');
+    if(p=='-') {
+        f=true;
+        p=getchar();
+    }
+    while(isdigit(p)){
+        n=(n<<3)+(n<<1)+(p-'0');
+        p=getchar();
+    }
+    if(f) n=-n;
+    return n;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>fastinput</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

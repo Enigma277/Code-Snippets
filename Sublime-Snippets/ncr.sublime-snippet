@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[
+const int M=1000006;
+int f[M],inv[M];
+int expo(int base,int exponent,int mod){
+    int ans=1;
+    while(exponent!=0){
+        if(exponent&1) ans=(1LL*ans*base)%mod;
+        base=(1LL*base*base)%mod;
+        exponent>>=1;
+    }
+    return ans%mod;
+}
+void compute(){
+	f[0]=1;
+	rep(i,1,M){
+		f[i]=(1LL*i*f[i-1])%hell;
+	}
+	inv[M-1]=expo(f[M-1],hell-2,hell);
+	for(int i=M-2;i>=0;i--){
+		inv[i]=(1LL*(i+1)*inv[i+1])%hell;
+	}
+}
+int C(int n,int r){
+	return (1LL*((1LL*f[n]*inv[r])%hell)*inv[n-r])%hell;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ncr</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
