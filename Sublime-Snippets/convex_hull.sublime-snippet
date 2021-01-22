@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+ll cross(pii A, pii B, pii C){
+	return (B.x-A.x)*(C.y-A.y)-(B.y-A.y)*(C.x-A.x);
+}
+void convex_hull(vector<pii> pts, vector<pii>& hull) {
+	hull.clear();
+	sort(pts.begin(), pts.end());
+	rep(i,0,sz(pts)){
+		while(sz(hull)>=2 && cross(hull[sz(hull)-2],hull.back(),pts[i])<=0) hull.pop_back();
+		hull.pb(pts[i]);
+	}
+	int s=sz(hull);
+	for(int i=pts.size()-2;i>=0;i--){
+		while(sz(hull)>=s+1 && cross(hull[sz(hull)-2],hull.back(),pts[i])<=0) hull.pop_back();
+		hull.pb(pts[i]);
+	}
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>convex_hull</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

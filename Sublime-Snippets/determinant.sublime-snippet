@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[
+int determinant(matrix a,int mod=0){
+    int N=a.n;
+    int ans=1;
+    rep(i,0,N) {
+        rep(j,i+1,N) {
+            while(a.val[j][i]!=0){
+                int t=a.val[i][i]/a.val[j][i];
+                if(t){
+	                rep(k,i,N){
+    	                a.val[i][k]=a.val[i][k]-t*a.val[j][k];
+    	                if(mod) a.val[i][k]%=mod;
+	                }
+                }
+                swap(a.val[i],a.val[j]);
+                ans*=-1;
+            }
+        }
+        ans=ans*a.val[i][i];
+        if(mod) ans%=mod;
+        if(!ans) return 0;
+    }
+    if(mod) return (ans+mod)%mod;
+    return ans;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>determinant</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

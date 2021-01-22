@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+ll mul(ll a,ll b,ll mod){
+	if(a==0 || b==0) return 0;
+	if(a==1 || b==1) return (a*b)%mod;
+	ll m=mul(a,b/2,mod);
+	m=(m+m)%mod;
+	if(b&1) return (m+a)%mod;
+	return m;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>mul</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

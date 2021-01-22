@@ -1,0 +1,31 @@
+<snippet>
+	<content><![CDATA[
+matrix GP(matrix A,matrix R,int N){
+	matrix T(2*R.n),B=A;
+	rep(i,0,2*R.n){
+		rep(j,0,2*R.n){
+			if(i<R.n and j<R.n){
+				T.val[i][j]=R.val[i][j];
+			}
+			else if(i<R.n){
+				T.val[i][j]=(i==j-R.n);
+			}
+			else if(j>=R.n){
+				T.val[i][j]=(i==j);
+			}
+		}
+	}
+	T=matexpo(T,N);
+	rep(i,0,A.n){
+		rep(j,0,A.n){
+			B.val[i][j]=T.val[i][j+A.n];
+		}
+	}
+	return B*A;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>gpmatrix</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

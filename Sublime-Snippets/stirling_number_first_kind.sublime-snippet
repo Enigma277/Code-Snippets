@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+vi poly_mul(int l,int r){
+    if(l==r){
+        vi g={l,1};
+        return g;
+    }
+    int m=(l+r)/2;
+    vi v1=mul(l,m),v2=mul(m+1,r),v3;
+    multiply(v1,v2,v3);
+    return v3;
+}
+int s(int n,int k){
+    vi v=mul(1,n-1);
+    return v[k-1];
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>first_stirling</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

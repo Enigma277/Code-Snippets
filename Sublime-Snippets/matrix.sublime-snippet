@@ -1,0 +1,99 @@
+<snippet>
+	<content><![CDATA[
+class matrix{
+public:
+	int n;
+	vector<vi> val;
+	matrix(int n=2);
+	matrix operator+(const matrix&) const;
+	matrix operator-(const matrix&) const;
+	matrix operator*(const matrix&) const;
+	matrix& operator=(const matrix& b){
+		val=b.val;
+		n=b.n;
+		return *this;
+	}
+	void set(int x){
+		rep(i,0,n){
+			rep(j,0,n){
+				val[i][j]=x;
+			}
+		}
+	}
+	void print(){
+		rep(i,0,n){
+			rep(j,0,n){
+				cout<<val[i][j]<<" ";
+			}
+			cout<<endl;
+		}
+	}
+	matrix mul(int a){
+		matrix ans(this->n);
+		rep(i,0,this->n){
+			rep(j,0,this->n){
+				ans.val[i][j]=a*this->val[i][j];
+			}
+		}
+		return ans;
+	}
+};
+matrix::matrix(int x){
+	n=x;
+	val.resize(x);
+	rep(i,0,x){
+		val[i].resize(x);
+	}
+}
+matrix matrix::operator+(const matrix& b) const{
+	matrix ans(b.n);
+	rep(i,0,b.n){
+		rep(j,0,b.n){
+			ans.val[i][j]=this->val[i][j]+b.val[i][j];
+		}
+	}
+	return ans;
+}
+matrix matrix::operator-(const matrix& b) const{
+	matrix ans(b.n);
+	rep(i,0,b.n){
+		rep(j,0,b.n){
+			ans.val[i][j]=this->val[i][j]-b.val[i][j];
+		}
+	}
+	return ans;
+}
+matrix matrix::operator*(const matrix& b) const{
+	matrix ans(b.n);
+	rep(i,0,b.n){
+		rep(j,0,b.n){
+			rep(k,0,b.n){
+				ans.val[i][j]+=this->val[i][k]*b.val[k][j];
+			}
+		}
+	}
+	return ans;			
+}
+matrix identity(int N=2){
+	matrix ans(N);
+	rep(i,0,N){
+		ans.val[i][i]=1;
+	}
+	return ans;
+}
+matrix matexpo(matrix a, int n){
+	if(n==0){
+		return identity(a.n);
+	}
+	if(n==1) return a;
+	matrix x=matexpo(a,n/2);
+	matrix r=x*x;
+	if(n&1) r=r*a;
+	return r;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>matrix</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
